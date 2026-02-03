@@ -1,0 +1,31 @@
+#include<stdio.h>
+int convertOctalToDecimal(int n){   
+    int sum = 0, base = 1;
+    while(n != 0){
+        int rem = n % 10;
+        sum += rem * base;
+        base = base * 8;
+        n = n / 10; 
+    }
+    return sum;
+}
+int convertDecimalToBinary(int n){
+    int binaryNum =0, place =1;
+    while(n != 0){
+        int rem = n % 2;
+        binaryNum += rem * place;
+        n = n / 2;
+        place = place * 10;
+    }
+    return binaryNum;
+}
+int main(){
+    int n;
+    printf("Enter an octal number: ");
+    scanf("%d", &n);
+    int decimal = convertOctalToDecimal(n);
+    printf("Decimal: %d\n", decimal);
+    int binary = convertDecimalToBinary(decimal);
+    printf("Binary: %d\n", binary);
+    return 0;
+}
