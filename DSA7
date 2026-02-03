@@ -1,0 +1,43 @@
+//Octal to Hexadecimal Conversion
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int convertOctalToDecimal(int n){   
+    int sum = 0, base = 1;
+    while(n != 0){
+        int rem = n % 10;
+        sum += rem * base;
+        base = base * 8;
+        n = n / 10; 
+    }
+    return sum;
+}
+void convertDecimalToHexadecimal(int n){
+    char *hexNum = (char *)calloc(100, sizeof(char));
+    int i = 0;
+    while(n != 0){
+        int rem = n % 16;
+        if(rem < 10){
+            hexNum[i] = rem + '0';
+        } else {
+            hexNum[i] = rem - 10 + 'A';
+        }
+        n = n / 16;
+        i++;
+    }
+    printf("Hexadecimal: ");
+    for(int j = i - 1; j >= 0; j--){
+        printf("%c", hexNum[j]);
+    }
+    printf("\n");
+    free(hexNum);
+}
+int main(){
+    int n;
+    printf("Enter an octal number: ");
+    scanf("%d", &n);
+    int decimal = convertOctalToDecimal(n);
+    printf("Decimal: %d\n", decimal);
+    convertDecimalToHexadecimal(decimal);
+    return 0;
+}
