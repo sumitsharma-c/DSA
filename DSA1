@@ -1,0 +1,37 @@
+// Binary to Decimal & Decimal to Octal Conversion 
+#include<stdio.h>
+int covertBinaryToDecimal(int n){
+    int sum = 0, base = 1;
+    while(n != 0){
+        int digit = n % 10;
+        sum += digit * base;
+        base = base * 2;
+        n = n / 10; 
+    }
+    return sum;
+} 
+
+int convertDecimalToOctal(int n){
+    int octalNum[100], i = 0;
+    while(n != 0){
+        octalNum[i] = n % 8;
+        n = n / 8;
+        i++;
+    }
+    printf("Octal: ");
+    for(int j = i - 1; j >= 0; j--){
+        printf("%d", octalNum[j]);
+    }
+    printf("\n");
+} 
+
+int main(){
+    int n;
+    printf("Enter a binary number: ");
+    scanf("%d", &n);
+    int decimal = covertBinaryToDecimal(n);
+    printf("Decimal: %d\n", decimal);
+    convertDecimalToOctal(decimal);
+    return 0;
+}
+
