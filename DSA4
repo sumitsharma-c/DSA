@@ -1,0 +1,29 @@
+//Octal to Binary Conversion 
+#include<stdio.h>
+void convertOctalToBinary(int n){
+    int decimalNum = 0, base = 1;
+    while(n != 0){
+        int rem = n % 10;
+        decimalNum += rem * base;
+        base = base * 8;
+        n = n / 10;
+    }
+    int binaryNum[100], i = 0;
+    while(decimalNum != 0){
+        binaryNum[i] = decimalNum % 2;
+        decimalNum = decimalNum / 2;
+        i++;
+    }
+    printf("Binary: ");
+    for(int j = i - 1; j >= 0; j--){
+        printf("%d", binaryNum[j]);
+    }
+    printf("\n");
+}
+int main(){
+    int n;
+    printf("Enter an octal number: ");
+    scanf("%d", &n);
+    convertOctalToBinary(n);
+    return 0;
+}
