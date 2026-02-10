@@ -1,0 +1,207 @@
+//Implement List Using Array
+#include <stdio.h>
+#define MAX_SIZE 100
+int list[MAX_SIZE];
+int size = 0;
+void insertAtBeginning(int element) {
+    if(size == MAX_SIZE) {
+        printf("List is full. Cannot insert element.\n");
+        return;
+    }
+    for(int i = size; i > 0; i--) {
+        list[i] = list[i - 1];
+    }
+    list[0] = element;
+    size++;
+    printf("Element inserted at the beginning.\n");
+}
+void insertAtEnd(int element) {
+    if(size == MAX_SIZE) {
+        printf("List is full. Cannot insert element.\n");
+        return;
+    }
+    list[size] = element;
+    size++;
+    printf("Element inserted at the end.\n");
+}
+void insertAtPosition(int element, int position) {
+    if(size == MAX_SIZE) {
+        printf("List is full. Cannot insert element.\n");
+        return;
+    }
+    if(position < 1 || position > size + 1) {
+        printf("Invalid position. Please try again.\n");
+        return;
+    }
+    for(int i = size; i >= position; i--) {
+        list[i] = list[i - 1];
+    }
+    list[position - 1] = element;
+    size++;
+    printf("Element inserted at position %d.\n", position);
+}
+void deleteFromBeginning() {
+    if(size == 0) {
+        printf("List is empty. Cannot delete element.\n");
+        return;
+    }
+    for(int i = 0; i < size - 1; i++) {
+        list[i] = list[i + 1];
+    }
+    size--;
+    printf("Element deleted from the beginning.\n");
+}
+void deleteFromEnd() {
+    if(size == 0) {
+        printf("List is empty. Cannot delete element.\n");
+        return;
+    }
+    size--;
+    printf("Element deleted from the end.\n");
+}
+void deleteFromPosition(int position) {
+    if(size == 0) {
+        printf("List is empty. Cannot delete element.\n");
+        return;
+    }
+    if(position < 1 || position > size) {
+        printf("Invalid position. Please try again.\n");
+        return;
+    }
+    for(int i = position - 1; i < size - 1; i++) {
+        list[i] = list[i + 1];
+    }
+    size--;
+    printf("Element deleted from position %d.\n", position);
+}
+
+void displayList() {
+    if(size == 0) {
+        printf("List is empty.\n");
+        return;
+    }
+    printf("List elements: ");
+    for(int i = 0; i < size; i++) {
+        printf("%d ", list[i]);
+    }
+    printf("\n");
+}
+void deleteElement(int element) {
+    int found = 0;
+    for(int i = 0; i < size; i++) {
+        if(list[i] == element) {
+            found = 1;
+            for(int j = i; j < size - 1; j++) {
+                list[j] = list[j + 1];
+            }
+            size--;
+            printf("Element %d deleted from the list.\n", element);
+            break;
+        }
+    }
+    if(!found) {
+        printf("Element not found in the list.\n");
+    }
+}
+void updateElement(int oldElement, int newElement) {
+    int found = 0;
+    for(int i = 0; i < size; i++) {
+        if(list[i] == oldElement) {
+            list[i] = newElement;
+            found = 1;
+            printf("Element %d updated to %d in the list.\n", oldElement, newElement);
+            break;
+        }
+    }
+    if(!found) {
+        printf("Element not found in the list.\n");
+    }
+}
+void bubbleSort() {
+    for(int i = 0; i < size - 1; i++) {
+        for(int j = 0; j < size - i - 1; j++) {
+            if(list[j] > list[j + 1]) {
+                int temp = list[j];
+                list[j] = list[j + 1];
+                list[j + 1] = temp;
+            }
+        }
+    }
+    printf("Elements sorted in ascending order.\n");
+}
+
+
+int main() {
+    while(1) {
+        printf("1. Insert In Beginning\n");
+        printf("2. Insert At End\n");
+        printf("3. Insert At Any Position\n");
+        printf("4. Delete From Beginning\n");
+        printf("5. Delete From End\n"); 
+        printf("6. Delete From Given Position\n");
+        printf("7. Display list\n");
+        printf("8. Delete Element in list\n");
+        printf("9. Update Element Of list\n");
+        printf("10. Sort Elements of List\n");
+        printf("11. Exit\n");
+        int choice, element, position, oldElement, newElement;
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch(choice) {
+            case 1:
+                printf("Enter element to insert: ");
+                scanf("%d", &element);
+                insertAtBeginning(element);
+                break;
+            case 2:
+                printf("Enter element to insert: ");
+                scanf("%d", &element);
+                insertAtEnd(element);
+                break;
+            case 3:
+                printf("Enter element to insert: ");
+                scanf("%d", &element);
+                printf("Enter position to insert: ");
+                scanf("%d", &position);
+                insertAtPosition(element, position);
+                break;
+            case 4:
+                deleteFromBeginning();
+                break;
+            case 5:
+                deleteFromEnd();
+                break;
+            case 6:
+                printf("Enter position to delete: ");
+                scanf("%d", &position);
+                deleteFromPosition(position);
+                break;
+            case 7:
+                displayList();
+                break;
+            case 8:
+                printf("Enter element to delete: ");
+                scanf("%d", &element);
+                deleteElement(element);
+                break;
+            case 9:
+                printf("Enter element to update: ");
+                scanf("%d", &oldElement);
+                printf("Enter new element: ");
+                scanf("%d", &newElement);
+                updateElement(oldElement, newElement);
+                break;
+            case 10:
+                bubbleSort();
+                break;
+            case 11:
+                printf("Exiting...\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+
+        }
+        printf("\n\n");
+    }
+    return 0;
+}
